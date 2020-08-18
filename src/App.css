@@ -8,16 +8,18 @@
 
 .content {
     grid-area: c;
+
+    margin: 10px 200px 50px 0px;
 }
 
 .header {
     grid-area: h;
-    background-color: #c4c4c4;
-    border: 3px solid rgba(0, 0, 0, 0.5);
-    margin: 5px;
-
+    background-color: #d4d4d4;
+    margin-bottom: 30px;
 }
 
 .sidebar {
     grid-area: s;
+
+    margin: 10px 100px 50px 150px;
 }

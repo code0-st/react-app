@@ -74,7 +74,7 @@ let store = {
                 },
                 {
                     id: 1,
-                    imgSrc: 'https://cdn.icon-icons.com/icons2/555/PNG/512/facebook_icon-icons.com_53612.png',
+                    imgSrc: 'https://www.freeiconspng.com/uploads/facebook-png-02-15.png',
                     href: 'https://ru-ru.facebook.com',
                     title: 'Facebook',
                 },

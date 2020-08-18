@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './../../App.css';
 import { Route } from 'react-router-dom';
 import Profile from './Profile/Profile';
 

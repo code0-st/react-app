@@ -1,0 +1,19 @@
+.photoBlock {
+    margin-right: 100px;
+    padding: 20px 30px;
+
+    background-color: #fff;
+}
+
+.photo {
+    display: block;
+
+    width: 175px;
+    height: 225px;
+
+    background-color: #fff;
+/* 
+    border: 2px solid rgba(31, 8, 61, 0.616);
+    border-radius: 10px;
+    overflow: hidden; */
+}

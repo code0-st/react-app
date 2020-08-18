@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './../Navigation.module.css'
 
-const BlockLink = (props) => {
+const Link = (props) => {
     return (
         <li className={style.item}>
             <NavLink to={props.href}
@@ -10,4 +10,4 @@ const BlockLink = (props) => {
         </li>
     );
 }
-export default BlockLink;
+export default Link;

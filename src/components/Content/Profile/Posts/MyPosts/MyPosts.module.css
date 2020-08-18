@@ -1,0 +1,27 @@
+.myPosts {
+    max-width: 895px;
+    margin-bottom: 100px;
+}
+
+.post {
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+}
+
+.postTitle {
+    color: #7c7c7caf;
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+
+    margin-bottom: 20px;
+}
+
+.postText {
+    line-height: 24px;
+
+    text-shadow: 0 0 35px #000;
+}

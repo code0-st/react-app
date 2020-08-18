@@ -7,13 +7,11 @@ import style from './Sidebar.module.css';
 
 const Sidebar = (props) => {
     return (
-        <aside className="sidebar">
-            <div className={style.column}>
-                <Navigation sidebarNavigation={props.state.sidebarNavigation} />
-                <PopularAuthors popularAuthors={props.state.popularAuthors} />
-                <SocialShare socialShare={props.state.socialShare} />
-            </div>
-        </aside >
+        <div className={style.column + ' ' + 'sidebar'}>
+            <Navigation sidebarNavigation={props.state.sidebarNavigation} />
+            <PopularAuthors popularAuthors={props.state.popularAuthors} />
+            <SocialShare socialShare={props.state.socialShare} />
+        </div>
     );
 }
 

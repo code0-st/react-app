@@ -1,28 +1,13 @@
 import React from 'react';
-import s from './../../../App.css'
+import ProfileInfo from './ProfileInfo/ProfileInfo';
+import Posts from './Posts/Posts';
+import style from './Profile.module.css';
 
 const Profile = () => {
     return (
-        <div className="profile">
-            <div>
-                Photo
-            </div>
-            <div>
-                <div>Amount of articles</div>
-                <div>Amount of followers</div>
-            </div>
-
-            <div>My followings</div>
-
-            <div>My name</div>
-
-            <div>
-                <div>My article</div>
-                <div>My article</div>
-                <div>My article</div>
-            </div>
-
-            <div> Add article field </div>
+        <div className={style.profile}>
+            <ProfileInfo />
+            <Posts />
         </div>
 
     );
