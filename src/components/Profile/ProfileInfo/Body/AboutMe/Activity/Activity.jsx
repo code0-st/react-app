@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './../../Body.module.css';
 
-const Activity = () => {
+const Activity = (props) => {
     return (
-        <div className={style.activity}>Junior Developer</div>
+        <div className={style.activity}>{props.activity}</div>
     );
 }
 

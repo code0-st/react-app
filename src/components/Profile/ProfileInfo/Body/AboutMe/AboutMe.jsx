@@ -3,11 +3,11 @@ import Name from './Name/Name';
 import Activity from './Activity/Activity';
 import style from './../Body.module.css';
 
-const AboutMe = () => {
+const AboutMe = (props) => {
     return (
         <div className={style.info}>
-            <Name />
-            <Activity />
+            <Name name={props.main.name} />
+            <Activity activity={props.main.activity} />
         </div>
     );
 }

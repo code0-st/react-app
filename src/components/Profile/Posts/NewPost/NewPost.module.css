@@ -10,6 +10,11 @@
     text-align: center;
 
     margin: 20px auto;
+
+    color: rgb(22, 22, 22);
+    font-size: 20px;
+    letter-spacing: 1.4px;
+    font-weight: 500;
 }
 
 .body {
@@ -22,6 +27,8 @@
     padding: 15px 30px;
 
     margin-bottom: 30px;
+
+    font-size: 18px;
 }
 
 .btn {

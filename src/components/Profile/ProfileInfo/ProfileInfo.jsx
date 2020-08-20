@@ -4,11 +4,11 @@ import Body from './Body/Body';
 
 import style from './ProfileInfo.module.css';
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
     return (
         <div className={style.profileInfo}>
-            <Avatar />
-            <Body />
+            <Avatar photo={props.me.photo} />
+            <Body main={props.me.main} />
         </div>
     )
 }
