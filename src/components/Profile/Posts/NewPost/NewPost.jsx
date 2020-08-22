@@ -5,23 +5,26 @@ import { changeNewPostTitleActionCreator, changeNewPostTextActionCreator, addNew
 const NewPost = (props) => {
     const titleRef = React.createRef();
     const textRef = React.createRef();
-    const changeNewPostTitle = () => {
-        //console.log(titleRef.current.value);
-        props.dispatch(changeNewPostTitleActionCreator(titleRef.current.value));
+
+    const onTitleChange = () => {
+        props.changeNewPostTitle(titleRef.current.value);
     }
-    const changeNewPostText = () => {
-        props.dispatch(changeNewPostTextActionCreator(textRef.current.value));
+    const onTextChange = () => {
+        props.changeNewPostText(textRef.current.value);
     }
-    const addNewPost = () => props.dispatch(addNewPostActionCreator());
+
+    const onAddPost = () => {
+        props.addNewPost()
+    }
 
     return (
         <div className={style.newpost}>
             <form>
-                <input ref={titleRef} className={style.title} placeholder="Заголовок" value={props.newPostTitle} onChange={changeNewPostTitle} />
-                <textarea ref={textRef} className={style.body} placeholder="Текст поста" value={props.newPostText} onChange={changeNewPostText}></textarea>
+                <input ref={titleRef} className={style.title} placeholder="Заголовок" value={props.newPostTitle} onChange={onTitleChange} />
+                <textarea ref={textRef} className={style.body} placeholder="Текст поста" value={props.newPostText} onChange={onTextChange}></textarea>
             </form>
-            <button className={style.btn} onClick={addNewPost}>Опубликовать</button>
-        </div>
+            <button className={style.btn} onClick={onAddPost}>Опубликовать</button>
+        </div >
     )
 }
 

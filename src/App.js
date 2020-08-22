@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Profile from './components/Profile/Profile'
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
+import Authors from './components/Authors/Authors';
 
 function App(props) {
   return (
@@ -12,7 +13,8 @@ function App(props) {
         <Header state={props.state.header} />
         <Sidebar state={props.state.sidebar} />
         <div className="app-content">
-          <Route path="/me" render={() => <Profile state={props.state.profilePage} dispatch={props.dispatch} />} />
+          <Route path="/me" render={() => <Profile state={props.state.profilePage} />} />
+          <Route path="/authors" render={() => <Authors />} />
           {/* TODO: create feedPage and authorsPage */}
         </div>
       </div >
