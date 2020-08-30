@@ -18,11 +18,7 @@
 }
 
 .photo {
-    width: 100px;
-    height: 100px;
-
     border-radius: 50%;
-    background-color: #000;
 }
 
 .name {
@@ -79,4 +75,24 @@ button:active, button:focus {
     text-decoration: none;
     
     text-transform: lowercase;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+
+    /* display: flex; */
+}
+
+span {
+    font-size: 18px;
+    margin: 0 5px;
+}
+
+.clicked {
+    font-weight: bold;
+}
+
+.default {
+    font-weight: normal;
 }

@@ -1,4 +1,4 @@
-import { followAC, unfollowAC, setDataAC } from "../../Redux/authorsPage-reducer";
+import { followAC, unfollowAC, setDataAC, setTotalCountAC, toggleCurrentPageAC } from "../../Redux/authorsPage-reducer";
 
 const { connect } = require("react-redux");
 const { default: Authors } = require("./Authors");
@@ -6,6 +6,9 @@ const { default: Authors } = require("./Authors");
 let mapStateToProps = (state) => {
     return {
         users: state.authorsPage.users,
+        usersForPage: state.authorsPage.usersForPage,
+        currentPage: state.authorsPage.currentPage,
+        totalCount: state.authorsPage.totalCount
     }
 }
 
@@ -19,6 +22,12 @@ let mapDispatchToProps = (dispatch) => {
         },
         setData: (data) => {
             dispatch(setDataAC(data))
+        },
+        setTotalCount: (totalCount) => {
+            dispatch(setTotalCountAC(totalCount))
+        },
+        toggleCurrentPage: (currentPage) => {
+            dispatch(toggleCurrentPageAC(currentPage))
         }
     }
 }

@@ -1,42 +1,14 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_DATA = 'SET_DATA';
+const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
+const TOGGLE_CURRENT_PAGE = 'TOGGLE_CURRENT_PAGE';
 
 const initialState = {
-    users: [
-        {
-            id: 0,
-            photoUrl: '',
-            userName: 'Абрахам Тугалов',
-            userActivity: 'Программист, ютубер',
-            totalPosts: 10,
-            isFollowed: true,
-        },
-        {
-            id: 1,
-            photoUrl: '',
-            userName: 'Владилен Минин',
-            userActivity: 'Front-end developer',
-            totalPosts: 5,
-            isFollowed: false,
-        },
-        {
-            id: 2,
-            photoUrl: '',
-            userName: 'Дмитрий Кузюбердин',
-            userActivity: 'Fullstack developer',
-            totalPosts: 12,
-            isFollowed: false,
-        },
-        {
-            id: 3,
-            photoUrl: '',
-            userName: 'Кирилл Эдуардович',
-            userActivity: 'Front-end beginner',
-            totalPosts: 3,
-            isFollowed: false,
-        }
-    ],
+    users: [],
+    totalCount: 300,
+    currentPage: 1,
+    usersForPage: 15,
 };
 
 const authorsPageReducer = (state = initialState, action) => {
@@ -70,11 +42,9 @@ const authorsPageReducer = (state = initialState, action) => {
                 }),
             };
         
-        case SET_DATA:
-            return {
-                ...state,
-                users: [...state.users, ...action.data],
-            };
+        case SET_DATA: { return {...state, users: [...action.data]}}
+        case SET_TOTAL_COUNT: { return {...state, totalCount: action.totalCount}}
+        case TOGGLE_CURRENT_PAGE: { return {...state, currentPage: action.currentPage}}
 
         default:
             return state;
@@ -84,5 +54,7 @@ const authorsPageReducer = (state = initialState, action) => {
 export const followAC = (id) => {return {type: FOLLOW, id}} 
 export const unfollowAC = (id) =>{return {type: UNFOLLOW, id}}
 export const setDataAC = (data) => {return {type: SET_DATA, data}}
+export const setTotalCountAC = (totalCount) => {return {type: SET_TOTAL_COUNT, totalCount}}
+export const toggleCurrentPageAC = (currentPage) => {return {type: TOGGLE_CURRENT_PAGE, currentPage}}
 
 export default authorsPageReducer;
