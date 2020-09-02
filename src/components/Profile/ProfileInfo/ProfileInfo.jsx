@@ -7,8 +7,8 @@ import style from './ProfileInfo.module.css';
 const ProfileInfo = (props) => {
     return (
         <div className={style.profileInfo}>
-            <Avatar photo={props.me.photo} />
-            <Body main={props.me.main} />
+            <Avatar photo={props.main.photo} />
+            <Body main={props.main} />
         </div>
     )
 }

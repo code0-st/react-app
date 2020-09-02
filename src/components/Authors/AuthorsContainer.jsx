@@ -1,14 +1,64 @@
-import { followAC, unfollowAC, setDataAC, setTotalCountAC, toggleCurrentPageAC } from "../../Redux/authorsPage-reducer";
+import React from 'react';
+import * as axios from 'axios';
+import preloader from '../../assets/preloaders/preloader.svg'
+import { followAC, unfollowAC, setDataAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC} from "../../Redux/authorsPage-reducer";
 
 const { connect } = require("react-redux");
 const { default: Authors } = require("./Authors");
+
+
+class AuthorsContainer extends React.Component {
+
+    componentDidMount = () => {
+        this.props.toggleIsFetching(true); 
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersForPage}&page=${this.props.currentPage}`)
+        .then(response => {
+            this.props.setData(response.data.items);
+            this.props.toggleIsFetching(false);
+            //this.props.setTotalCount(response.data.totalCount)
+        })
+    }
+
+    onChangeCurrentPage = (pageNumber) => {
+        this.props.toggleIsFetching(true);
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersForPage}&page=${pageNumber}`)
+            .then(response => {
+                this.props.setData(response.data.items)
+                this.props.toggleIsFetching(false);
+            })
+    }
+
+    render = () => {
+        return (
+            <>
+            {
+                this.props.isFetching
+                ? <div>
+                    <img src={preloader} alt=""/>
+                </div>
+                : <Authors totalCount={this.props.totalCount}
+                usersForPage={this.props.usersForPage}
+                currentPage={this.props.currentPage}
+                onChangeCurrentPage={this.onChangeCurrentPage}
+                users={this.props.users}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
+            />
+            } 
+             
+            </>
+        );
+    }
+};
 
 let mapStateToProps = (state) => {
     return {
         users: state.authorsPage.users,
         usersForPage: state.authorsPage.usersForPage,
         currentPage: state.authorsPage.currentPage,
-        totalCount: state.authorsPage.totalCount
+        totalCount: state.authorsPage.totalCount,
+        isFetching: state.authorsPage.isFetching
     }
 }
 
@@ -21,17 +71,18 @@ let mapDispatchToProps = (dispatch) => {
             dispatch(unfollowAC(id));
         },
         setData: (data) => {
-            dispatch(setDataAC(data))
+            dispatch(setDataAC(data));
         },
         setTotalCount: (totalCount) => {
-            dispatch(setTotalCountAC(totalCount))
+            dispatch(setTotalCountAC(totalCount));
         },
-        toggleCurrentPage: (currentPage) => {
-            dispatch(toggleCurrentPageAC(currentPage))
+        setCurrentPage: (currentPage) => {
+            dispatch(setCurrentPageAC(currentPage));
+        },
+        toggleIsFetching: (isFetching) => {
+            dispatch(toggleIsFetchingAC(isFetching));
         }
     }
 }
 
-const AuthorsContainer = connect(mapStateToProps, mapDispatchToProps)(Authors);
-
-export default AuthorsContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorsContainer);

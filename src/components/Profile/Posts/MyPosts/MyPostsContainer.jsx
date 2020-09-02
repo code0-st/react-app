@@ -4,7 +4,7 @@ import { likeClickActionCreator, setDataActionCreator, dislikeClickActionCreator
 
 let mapStateToProps = (state) => {
     return {
-        myPosts: state.profilePage.posts.myPosts,
+        myPosts: state.profilePage.myPosts,
     }
 }
 

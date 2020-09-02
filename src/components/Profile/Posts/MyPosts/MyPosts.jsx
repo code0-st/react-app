@@ -3,6 +3,7 @@ import React from 'react';
 import style from './MyPosts.module.css';
 
 const MyPosts = (props) => {
+    
     return (
         <div className={style.myPosts}>
             {
@@ -14,6 +15,7 @@ const MyPosts = (props) => {
                     <div className={style.postTitle}>{post.title}</div>
                     <div className={style.postText}>{post.text}</div>
                     {
+                        
                         post.like.isLiked
                             ? <div className={style.postLikesCliked} onClick={() => props.dislikeClick(post.id)}>Like: {post.like.amount}</div>
                             : <div className={style.postLikes} onClick={() => props.likeClick(post.id)}>Like: {post.like.amount}</div>

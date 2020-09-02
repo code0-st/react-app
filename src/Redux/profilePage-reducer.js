@@ -3,10 +3,10 @@ const CHANGE_NEW_POST_TEXT = 'CHANGE_NEW_POST_TEXT';
 const ADD_NEW_POST = 'ADD_NEW_POST';
 const LIKE_CLICK = 'LIKE_CLICK';
 const DISLIKE_CLICK = 'DISLIKE_CLICK';
-const SET_DATA = 'SET_DATA';
+const SET_PPROFILE_DATA = 'SET_PROFILE_DATA';
 
 const initialState = {
-    posts: {
+    
         myPosts: [
             {
                 id: 0,
@@ -45,9 +45,7 @@ const initialState = {
 
         newPostTitle: '',
         newPostText: '',
-    },
 
-    me: {
         main: {
             name: 'Кирилл Эдуардович',
             activity: 'Junior developer',
@@ -71,39 +69,33 @@ const initialState = {
                     title: 'posts',
                 }
             ],
-        },
-
+    
         photo: 'https://sun2-3.userapi.com/c854016/v854016369/22a679/yTmYKW0ijp8.jpg',
     },
 };
 
 const profilePageReducer = (state = initialState, action) => {
+    
     switch (action.type) {
         case CHANGE_NEW_POST_TITLE:
             return {
                 ...state,
-                posts: {
-                    ...state.posts,
-                    newPostTitle: action.text
-                },
+                newPostTitle: action.text
             };
 
         case CHANGE_NEW_POST_TEXT:
             return {
                 ...state,
-                posts: {
-                    ...state.posts,
-                    newPostText: action.text
-                },
+                newPostText: action.text
             };
 
         case ADD_NEW_POST:
             let now = new Date();
             let today = `${now.getDate()} ${now.toLocaleString('ru', { month: 'long' })} ${now.getFullYear()}, ${now.getHours()}:${now.getMinutes()}`;
             let newPost = {
-                id: state.posts.myPosts.length,
-                title: state.posts.newPostTitle,
-                text: state.posts.newPostText,
+                id: state.myPosts.length,
+                title: state.newPostTitle,
+                text: state.newPostText,
                 like: {
                     amount: 0,
                     isLiked: false,
@@ -111,22 +103,18 @@ const profilePageReducer = (state = initialState, action) => {
                 subjectName: 'Программирование',
                 publicationTime: String(today),
             }
-            state.me.main.mySocialLinks[2].amount = state.posts.myPosts.length + 1;
+            state.main.mySocialLinks[2].amount = state.myPosts.length + 1;
             return {
                 ...state,
-                posts: {
-                    ...state.posts,
-                    myPosts: [...state.posts.myPosts, newPost],
+                    myPosts: [...state.myPosts, newPost],
                     newPostText: '',
                     newPostTitle: '',
-                },
             };
 
         case LIKE_CLICK:
             {
                 let stateCopy = { ...state };
-                stateCopy.posts = { ...state.posts };
-                stateCopy.posts.myPosts = state.posts.myPosts.map(post => {
+                stateCopy.myPosts = state.myPosts.map(post => {
                     if (post.id === action.id && post.like.isLiked === false) {
                         return {
                             ...post,
@@ -144,8 +132,7 @@ const profilePageReducer = (state = initialState, action) => {
 
         case DISLIKE_CLICK:
             let stateCopy = { ...state };
-            stateCopy.posts = { ...state.posts };
-            stateCopy.posts.myPosts = state.posts.myPosts.map(post => {
+            stateCopy.myPosts = state.myPosts.map(post => {
                 if (post.id === action.id && post.like.isLiked === true) {
                     return {
                         ...post,
@@ -160,14 +147,11 @@ const profilePageReducer = (state = initialState, action) => {
             });
             return stateCopy;
 
-        case SET_DATA:
+        case SET_PPROFILE_DATA:
             return {
                 ...state,
-                posts: {
-                    ...state.posts,
-                    myPosts: [...state.posts.myPosts, ...action.data],
-                }
-            };
+                myPosts: [...state.posts.myPosts, ...action.data],
+            }
 
         default:
             return state;
@@ -210,7 +194,7 @@ export const dislikeClickActionCreator = id => {
 
 export const setDataActionCreator = (data) => {
     return {
-        type: SET_DATA,
+        type: SET_PPROFILE_DATA,
         data,
     }
 }
