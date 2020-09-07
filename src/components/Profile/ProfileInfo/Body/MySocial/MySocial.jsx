@@ -3,8 +3,7 @@ import MySocialLink from './MySocialLink/MySocialLink';
 import style from './../Body.module.css';
 
 const MySocial = (props) => {
-
-    const mySocialLinksElements = props.mySocialLinks.
+    const mySocialLinksElements = props.social.
         map(link => <MySocialLink href={link.href} amount={link.amount} title={link.title} />)
 
     return (

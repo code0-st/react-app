@@ -19,7 +19,7 @@ const initialState = {
     sidebarNavigation: [
         {
             id: 0,
-            href: '/me',
+            href: '/id',
             title: 'Профиль',
         },
         {

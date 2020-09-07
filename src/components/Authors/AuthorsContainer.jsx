@@ -1,7 +1,7 @@
 import React from 'react';
 import * as axios from 'axios';
-import preloader from '../../assets/preloaders/preloader.svg'
 import { followAC, unfollowAC, setDataAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC} from "../../Redux/authorsPage-reducer";
+import Preloader from '../Common/Preloader';
 
 const { connect } = require("react-redux");
 const { default: Authors } = require("./Authors");
@@ -15,7 +15,7 @@ class AuthorsContainer extends React.Component {
         .then(response => {
             this.props.setData(response.data.items);
             this.props.toggleIsFetching(false);
-            //this.props.setTotalCount(response.data.totalCount)
+            this.props.setTotalCount(response.data.totalCount)
         })
     }
 
@@ -34,9 +34,7 @@ class AuthorsContainer extends React.Component {
             <>
             {
                 this.props.isFetching
-                ? <div>
-                    <img src={preloader} alt=""/>
-                </div>
+                ? <Preloader />
                 : <Authors totalCount={this.props.totalCount}
                 usersForPage={this.props.usersForPage}
                 currentPage={this.props.currentPage}

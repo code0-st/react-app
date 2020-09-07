@@ -6,8 +6,8 @@ import style from './../Body.module.css';
 const AboutMe = (props) => {
     return (
         <div className={style.info}>
-            <Name name={props.main.name} />
-            <Activity activity={props.main.activity} />
+            <Name name={props.profileInfo.fullName} />
+            <Activity activity={props.profileInfo.aboutMe} />
         </div>
     );
 }

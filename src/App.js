@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from './components/Header/header';
 import Sidebar from './components/Sidebar/Sidebar';
-import Profile from './components/Profile/Profile'
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import AuthorsContainer from './components/Authors/AuthorsContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 function App(props) {
   return (
@@ -13,13 +13,13 @@ function App(props) {
         <Header state={props.state.header} />
         <Sidebar state={props.state.sidebar} />
         <div className="app-content">
-          <Route path="/me" render={() => <Profile state={props.state.profilePage} />} />
+          <Route path="/id/:userID" render={() => <ProfileContainer />} />
           <Route path="/authors" render={() => <AuthorsContainer />} />
-          {/* TODO: create feedPage and authorsPage */}
+          {/* TODO: create feedPage */}
         </div>
       </div >
     </BrowserRouter>
   );
-}
+} 
 
 export default App;

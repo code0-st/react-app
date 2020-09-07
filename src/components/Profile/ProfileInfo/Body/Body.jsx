@@ -6,8 +6,8 @@ import MySocial from './MySocial/MySocial';
 const Body = (props) => {
     return (
         <div className={style.body}>
-            <AboutMe main={props.main} />
-            <MySocial mySocialLinks={props.main.mySocialLinks} />
+            <AboutMe profileInfo={props.profile} />
+            <MySocial social={props.social} />
         </div>
     );
 }

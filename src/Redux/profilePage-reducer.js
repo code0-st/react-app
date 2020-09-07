@@ -4,10 +4,13 @@ const ADD_NEW_POST = 'ADD_NEW_POST';
 const LIKE_CLICK = 'LIKE_CLICK';
 const DISLIKE_CLICK = 'DISLIKE_CLICK';
 const SET_PPROFILE_DATA = 'SET_PROFILE_DATA';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 const initialState = {
+
+    id: 0,
     
-        myPosts: [
+    myPosts: [
             {
                 id: 0,
                 title: 'First post',
@@ -41,37 +44,36 @@ const initialState = {
                     isLiked: false
                 },
             },
+    ],
+
+    newPostTitle: '',
+    newPostText: '',
+
+    main: {
+        name: 'Кирилл Эдуардович',
+        activity: 'Junior developer',
+        mySocialLinks: [
+            {
+                href: '/followers',
+                amount: 0,
+                title: 'followers',
+            },
+            {
+                href: '/followings',
+                amount: 0,
+                title: 'followings',
+            },
+            {
+                href: '/myposts',
+                amount: 0,
+                title: 'posts',
+            }
         ],
-
-        newPostTitle: '',
-        newPostText: '',
-
-        main: {
-            name: 'Кирилл Эдуардович',
-            activity: 'Junior developer',
-            mySocialLinks: [
-                {
-                    id: 0,
-                    href: '/followers',
-                    amount: 0,
-                    title: 'followers',
-                },
-                {
-                    id: 1,
-                    href: '/followings',
-                    amount: 0,
-                    title: 'followings',
-                },
-                {
-                    id: 2,
-                    href: '/myposts',
-                    amount: 0,
-                    title: 'posts',
-                }
-            ],
     
         photo: 'https://sun2-3.userapi.com/c854016/v854016369/22a679/yTmYKW0ijp8.jpg',
     },
+
+    profile: null,
 };
 
 const profilePageReducer = (state = initialState, action) => {
@@ -153,6 +155,12 @@ const profilePageReducer = (state = initialState, action) => {
                 myPosts: [...state.posts.myPosts, ...action.data],
             }
 
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.profile,
+            }
+
         default:
             return state;
     };
@@ -196,6 +204,13 @@ export const setDataActionCreator = (data) => {
     return {
         type: SET_PPROFILE_DATA,
         data,
+    }
+}
+
+export const setUserProfileAC = (profile) => {
+    return {
+        type: SET_USER_PROFILE,
+        profile: profile,
     }
 }
 

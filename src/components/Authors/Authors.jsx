@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './Authors.module.css';
 import userPhoto from '../../assets/img/user.png';
+import { NavLink } from 'react-router-dom';
 
 const Authors = (props) => {
     let pagesCount = Math.ceil(props.totalCount / props.usersForPage);
@@ -18,9 +19,9 @@ const Authors = (props) => {
             </ul>
             {        
             props.users.map(user => <div className={style.user}>
-            <div className={style.photo}>
+            <NavLink to={`id/${user.id}`} className={style.photo}>
                 <img src={user.photos.small === null ? userPhoto : user.photos.small} alt=""/>
-            </div>
+            </NavLink>
             <div className="info">
                 <div className={style.name}>
                     {user.name}
