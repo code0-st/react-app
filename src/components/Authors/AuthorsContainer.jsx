@@ -10,22 +10,28 @@ const { default: Authors } = require("./Authors");
 class AuthorsContainer extends React.Component {
 
     componentDidMount = () => {
-        this.props.toggleIsFetching(true); 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersForPage}&page=${this.props.currentPage}`)
+        this.props.toggleIsFetchingAC(true); 
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersForPage}&page=${this.props.currentPage}`,
+        {
+            withCredentials: true,
+        })
         .then(response => {
-            this.props.setData(response.data.items);
-            this.props.toggleIsFetching(false);
-            this.props.setTotalCount(response.data.totalCount)
+            this.props.setDataAC(response.data.items);
+            this.props.toggleIsFetchingAC(false);
+            //this.props.setTotalCount(response.data.totalCount)
         })
     }
 
     onChangeCurrentPage = (pageNumber) => {
-        this.props.toggleIsFetching(true);
-        this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersForPage}&page=${pageNumber}`)
+        this.props.toggleIsFetchingAC(true);
+        this.props.setCurrentPageAC(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersForPage}&page=${pageNumber}`,
+        {
+            withCredentials: true,
+        })
             .then(response => {
-                this.props.setData(response.data.items)
-                this.props.toggleIsFetching(false);
+                this.props.setDataAC(response.data.items)
+                this.props.toggleIsFetchingAC(false);
             })
     }
 
@@ -40,8 +46,9 @@ class AuthorsContainer extends React.Component {
                 currentPage={this.props.currentPage}
                 onChangeCurrentPage={this.onChangeCurrentPage}
                 users={this.props.users}
-                follow={this.props.follow}
-                unfollow={this.props.unfollow}
+                follow={this.props.followAC}
+                unfollow={this.props.unfollowAC}
+                //followAC, unfollowAC, setDataAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC
             />
             } 
              
@@ -60,27 +67,27 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (id) => {
-            dispatch(followAC(id));
-        },
-        unfollow: (id) => {
-            dispatch(unfollowAC(id));
-        },
-        setData: (data) => {
-            dispatch(setDataAC(data));
-        },
-        setTotalCount: (totalCount) => {
-            dispatch(setTotalCountAC(totalCount));
-        },
-        setCurrentPage: (currentPage) => {
-            dispatch(setCurrentPageAC(currentPage));
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetchingAC(isFetching));
-        }
-    }
-}
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         follow: (id) => {
+//             dispatch(followAC(id));
+//         },
+//         unfollow: (id) => {
+//             dispatch(unfollowAC(id));
+//         },
+//         setData: (data) => {
+//             dispatch(setDataAC(data));
+//         },
+//         setTotalCount: (totalCount) => {
+//             dispatch(setTotalCountAC(totalCount));
+//         },
+//         setCurrentPage: (currentPage) => {
+//             dispatch(setCurrentPageAC(currentPage));
+//         },
+//         toggleIsFetching: (isFetching) => {
+//             dispatch(toggleIsFetchingAC(isFetching));
+//         }
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthorsContainer);
+export default connect(mapStateToProps, {followAC, unfollowAC, setDataAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC})(AuthorsContainer);

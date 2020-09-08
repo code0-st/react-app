@@ -16,4 +16,6 @@ let rerenderDom = () => {
 
 rerenderDom();
 
+window.store = store;
+
 store.subscribe(rerenderDom);

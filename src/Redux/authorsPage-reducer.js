@@ -21,10 +21,9 @@ const authorsPageReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map(user => {
                     if (user.id === action.id) {
-                        console.log(user.isFollowed);
                         return {
                             ...user,
-                            isFollowed: true,
+                            followed: true,
                         }
                     }
                     return user;
@@ -38,7 +37,7 @@ const authorsPageReducer = (state = initialState, action) => {
                     if (user.id === action.id) {
                         return {
                             ...user,
-                            isFollowed: false,
+                            followed: false,
                         }
                     }
                     return user;

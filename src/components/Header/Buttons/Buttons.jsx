@@ -1,11 +1,14 @@
 import React from 'react';
 import styles from './../header.module.css';
+import { NavLink } from 'react-router-dom';
 
-const Buttons = () => {
+const Buttons = (props) => {
     return (
         <div className="btns">
-            <button className={styles.btn + ' ' + styles.btnLogIn}>Войти</button>
-            <button className={styles.btn + ' ' + styles.btnSignUp}>Регистрация</button>
+            {
+                props.isLogin ? <div className={styles.btnLogIn}>Здравствуйте, {props.login}</div>
+                : <NavLink to='/login' className={styles.btn + ' ' + styles.btnLogIn}>Войти</NavLink>
+            }
         </div>
     );
 }

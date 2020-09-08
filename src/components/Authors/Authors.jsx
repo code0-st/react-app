@@ -1,4 +1,5 @@
 import React from 'react';
+import * as axios from 'axios';
 import style from './Authors.module.css';
 import userPhoto from '../../assets/img/user.png';
 import { NavLink } from 'react-router-dom';
@@ -35,9 +36,34 @@ const Authors = (props) => {
                     Публикаций: 'int'
                 </div>
                 {
-                    user.isFollowed
-                    ? <button className={`${style.btn} ${style.unfollow}`} onClick={() => props.unfollow(user.id)}>Отписаться</button>
-                    : <button className={`${style.btn} ${style.follow}`} onClick={() => props.follow(user.id)}>Подписаться</button>
+                    user.followed
+                    ? <button className={`${style.btn} ${style.unfollow}`} onClick={ () => {
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
+                            withCredentials: true,
+                            headers: {
+                                "API-KEY": "f30cbbde-97db-45fa-a1d2-c9f6fd8b368e",
+                            }
+                        })
+                            .then(response => {
+                                if (response.data.resultCode === 0) {
+                                    props.unfollow(user.id)
+                                }
+                            })
+                    }}>Отписаться</button>
+                    : <button className={`${style.btn} ${style.follow}`} onClick={() => {
+                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, 
+                        {
+                            withCredentials: true,
+                            headers: {
+                                "API-KEY": 'f30cbbde-97db-45fa-a1d2-c9f6fd8b368e',
+                            }
+                        })
+                        .then(response => {
+                            if (response.data.resultCode === 0) {
+                                props.follow(user.id)
+                            }
+                        })
+                    }}>Подписаться</button>
                 }
                 <div className={style.link}>
                     <a className={style.goto} href={`/authors/${user.id}`}>Перейти</a>
