@@ -37,33 +37,13 @@ const Authors = (props) => {
                 </div>
                 {
                     user.followed
-                    ? <button className={`${style.btn} ${style.unfollow}`} onClick={ () => {
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-                            withCredentials: true,
-                            headers: {
-                                "API-KEY": "f30cbbde-97db-45fa-a1d2-c9f6fd8b368e",
-                            }
-                        })
-                            .then(response => {
-                                if (response.data.resultCode === 0) {
-                                    props.unfollow(user.id)
-                                }
-                            })
-                    }}>Отписаться</button>
-                    : <button className={`${style.btn} ${style.follow}`} onClick={() => {
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, 
-                        {
-                            withCredentials: true,
-                            headers: {
-                                "API-KEY": 'f30cbbde-97db-45fa-a1d2-c9f6fd8b368e',
-                            }
-                        })
-                        .then(response => {
-                            if (response.data.resultCode === 0) {
-                                props.follow(user.id)
-                            }
-                        })
-                    }}>Подписаться</button>
+                    ? <button className={`${style.btn} ${style.unfollow}`}
+                        disabled={props.disabled.some(id => id === user.id)}
+                        onClick={ () => props.unfollow(user.id)}>Отписаться</button>
+                        
+                    : <button className={`${style.btn} ${style.follow}`}
+                        disabled={props.disabled.some(id => id === user.id)}
+                        onClick={ () => props.follow(user.id)}>Подписаться</button>
                 }
                 <div className={style.link}>
                     <a className={style.goto} href={`/authors/${user.id}`}>Перейти</a>

@@ -65,11 +65,15 @@ button {
     background: none;
     border: none;
 }
+
 button:active, button:focus {
     outline: none;
- 
 }
 
+.btn:disabled {
+    background-color: rgb(66, 66, 66);
+    cursor: progress;
+}
 .goto {
     padding: 5px;
     color: rgb(50, 0, 0);

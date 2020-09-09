@@ -1,3 +1,5 @@
+import { profileAPI } from '../api/api';
+
 const CHANGE_NEW_POST_TITLE = 'CHANGE_NEW_POST_TITLE';
 const CHANGE_NEW_POST_TEXT = 'CHANGE_NEW_POST_TEXT';
 const ADD_NEW_POST = 'ADD_NEW_POST';
@@ -5,6 +7,7 @@ const LIKE_CLICK = 'LIKE_CLICK';
 const DISLIKE_CLICK = 'DISLIKE_CLICK';
 const SET_PPROFILE_DATA = 'SET_PROFILE_DATA';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const TOGGLE_PROFILE_FETCHING = 'TOGGLE_PROFILE_FETCHING';
 
 const initialState = {
 
@@ -74,6 +77,8 @@ const initialState = {
     },
 
     profile: null,
+
+    profileIsFetching: false,
 };
 
 const profilePageReducer = (state = initialState, action) => {
@@ -161,6 +166,8 @@ const profilePageReducer = (state = initialState, action) => {
                 profile: action.profile,
             }
 
+        case TOGGLE_PROFILE_FETCHING: {return {...state, profileIsFetching: action.isFetching}}
+
         default:
             return state;
     };
@@ -211,6 +218,19 @@ export const setUserProfileAC = (profile) => {
     return {
         type: SET_USER_PROFILE,
         profile: profile,
+    }
+}
+
+const toggleProfileFetching = (isFetching) => { return {type: TOGGLE_PROFILE_FETCHING, isFetching}}
+
+export const setProfile = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleProfileFetching(true))
+        profileAPI.setProfile(userId)
+        .then(data => {
+            dispatch(setUserProfileAC(data));
+            dispatch(toggleProfileFetching(false));
+        });
     }
 }
 

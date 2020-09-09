@@ -1,6 +1,5 @@
 import React from 'react';
-import * as axios from 'axios';
-import { followAC, unfollowAC, setDataAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC} from "../../Redux/authorsPage-reducer";
+import { setTotalCountAC, getUsers, follow, unfollow} from "../../Redux/authorsPage-reducer";
 import Preloader from '../Common/Preloader';
 
 const { connect } = require("react-redux");
@@ -8,31 +7,12 @@ const { default: Authors } = require("./Authors");
 
 
 class AuthorsContainer extends React.Component {
-
     componentDidMount = () => {
-        this.props.toggleIsFetchingAC(true); 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersForPage}&page=${this.props.currentPage}`,
-        {
-            withCredentials: true,
-        })
-        .then(response => {
-            this.props.setDataAC(response.data.items);
-            this.props.toggleIsFetchingAC(false);
-            //this.props.setTotalCount(response.data.totalCount)
-        })
+        this.props.getUsers(this.props.usersForPage, this.props.currentPage);
     }
 
     onChangeCurrentPage = (pageNumber) => {
-        this.props.toggleIsFetchingAC(true);
-        this.props.setCurrentPageAC(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersForPage}&page=${pageNumber}`,
-        {
-            withCredentials: true,
-        })
-            .then(response => {
-                this.props.setDataAC(response.data.items)
-                this.props.toggleIsFetchingAC(false);
-            })
+        this.props.getUsers(this.props.usersForPage, pageNumber);
     }
 
     render = () => {
@@ -44,14 +24,13 @@ class AuthorsContainer extends React.Component {
                 : <Authors totalCount={this.props.totalCount}
                 usersForPage={this.props.usersForPage}
                 currentPage={this.props.currentPage}
-                onChangeCurrentPage={this.onChangeCurrentPage}
                 users={this.props.users}
-                follow={this.props.followAC}
-                unfollow={this.props.unfollowAC}
-                //followAC, unfollowAC, setDataAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC
+                disabled={this.props.disabled}
+                onChangeCurrentPage={this.onChangeCurrentPage}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
             />
             } 
-             
             </>
         );
     }
@@ -63,31 +42,10 @@ let mapStateToProps = (state) => {
         usersForPage: state.authorsPage.usersForPage,
         currentPage: state.authorsPage.currentPage,
         totalCount: state.authorsPage.totalCount,
-        isFetching: state.authorsPage.isFetching
+        isFetching: state.authorsPage.isFetching,
+        disabled: state.authorsPage.disabled,
     }
 }
 
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (id) => {
-//             dispatch(followAC(id));
-//         },
-//         unfollow: (id) => {
-//             dispatch(unfollowAC(id));
-//         },
-//         setData: (data) => {
-//             dispatch(setDataAC(data));
-//         },
-//         setTotalCount: (totalCount) => {
-//             dispatch(setTotalCountAC(totalCount));
-//         },
-//         setCurrentPage: (currentPage) => {
-//             dispatch(setCurrentPageAC(currentPage));
-//         },
-//         toggleIsFetching: (isFetching) => {
-//             dispatch(toggleIsFetchingAC(isFetching));
-//         }
-//     }
-// }
-
-export default connect(mapStateToProps, {followAC, unfollowAC, setDataAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC})(AuthorsContainer);
+export default connect(mapStateToProps, {setTotalCountAC,
+        getUsers, follow, unfollow})(AuthorsContainer);
