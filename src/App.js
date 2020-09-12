@@ -1,20 +1,25 @@
 import React from 'react';
+/* LIBRARIES */
 import Header from './components/Header/header';
-import Sidebar from './components/Sidebar/Sidebar';
 import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
+/* COMPONENTS */
 import AuthorsContainer from './components/Authors/AuthorsContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import SidebarContainer from './components/Sidebar/SidebarContainer';
+/* STYLE */
+import './App.css';
+import Login from './components/Login/Login';
 
 function App(props) {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header state={props.state.header} />
-        <Sidebar state={props.state.sidebar} />
+        <SidebarContainer />
         <div className="app-content">
-          <Route path="/id/:userID" render={() => <ProfileContainer />} />
+          <Route path="/profile/:userID" render={() => <ProfileContainer />} />
           <Route path="/authors" render={() => <AuthorsContainer />} />
+          <Route path="/login" render={() => <Login />} />
           {/* TODO: create feedPage */}
         </div>
       </div >

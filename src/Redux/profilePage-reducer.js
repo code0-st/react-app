@@ -8,6 +8,7 @@ const DISLIKE_CLICK = 'DISLIKE_CLICK';
 const SET_PPROFILE_DATA = 'SET_PROFILE_DATA';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const TOGGLE_PROFILE_FETCHING = 'TOGGLE_PROFILE_FETCHING';
+const SET_USER_STATUS = 'SET_USER_STATUS';
 
 const initialState = {
 
@@ -77,8 +78,8 @@ const initialState = {
     },
 
     profile: null,
-
     profileIsFetching: false,
+    status: '',
 };
 
 const profilePageReducer = (state = initialState, action) => {
@@ -168,6 +169,8 @@ const profilePageReducer = (state = initialState, action) => {
 
         case TOGGLE_PROFILE_FETCHING: {return {...state, profileIsFetching: action.isFetching}}
 
+        case SET_USER_STATUS: {return {...state, status: action.status}}
+
         default:
             return state;
     };
@@ -222,6 +225,7 @@ export const setUserProfileAC = (profile) => {
 }
 
 const toggleProfileFetching = (isFetching) => { return {type: TOGGLE_PROFILE_FETCHING, isFetching}}
+const setUserStatus = (status) => {return {type: SET_USER_STATUS, status}}
 
 export const setProfile = (userId) => {
     return (dispatch) => {
@@ -232,6 +236,24 @@ export const setProfile = (userId) => {
             dispatch(toggleProfileFetching(false));
         });
     }
+}
+
+export const setStatus = (userId) => {
+    return (dispatch) => {
+        profileAPI.getStatus(userId)
+        .then(response => {
+            dispatch(setUserStatus(response.data))
+        })
+    }
+}
+
+export const updateStatus = (status) => dispatch => {
+    profileAPI.updateStatus(status)
+    .then(response => {
+        if (response.resultCode === 0) {
+            dispatch(setUserStatus(status))
+        }
+    })
 }
 
 export default profilePageReducer;

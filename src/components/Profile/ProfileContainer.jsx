@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Profile from './Profile';
-import { setProfile } from '../../Redux/profilePage-reducer';
+import { setProfile, setStatus, updateStatus } from '../../Redux/profilePage-reducer';
 import Preloader from '../Common/Preloader';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
-    componentDidMount = () => {
+    componentDidMount = () => { 
         const userId = this.props.match.params.userID;
         this.props.setProfile(userId);
+        this.props.setStatus(userId);
     }
 
     render = () => {
@@ -18,10 +21,9 @@ class ProfileContainer extends React.Component {
             {
             this.props.isFetching
                 ? <Preloader />
-                : <Profile {...this.props} profile={this.props.profile}/>
+                : <Profile {...this.props} profile={this.props.profile} status={this.props.status} setStatus={this.props.setStatus} updateStatus={this.props.updateStatus}/>
             }
             </>
-            
         );
     }
 }
@@ -31,9 +33,12 @@ const mapStateToProps = (state) => {
         profile: state.profilePage.profile,
         main: state.profilePage.main,
         isFetching: state.profilePage.profileIsFetching,
+        status: state.profilePage.status,
     }
 }
 
-const withRouterProfileContainer = withRouter(ProfileContainer);
-
-export default connect(mapStateToProps, { setProfile })(withRouterProfileContainer);
+export default compose(
+    connect(mapStateToProps, { setProfile, setStatus, updateStatus }),
+    withRouter,
+    // withAuthRedirect,
+)(ProfileContainer)

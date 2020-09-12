@@ -20,7 +20,7 @@ const Authors = (props) => {
             </ul>
             {        
             props.users.map(user => <div className={style.user}>
-            <NavLink to={`id/${user.id}`} className={style.photo}>
+            <NavLink to={`profile/${user.id}`} className={style.photo}>
                 <img src={user.photos.small === null ? userPhoto : user.photos.small} alt=""/>
             </NavLink>
             <div className="info">

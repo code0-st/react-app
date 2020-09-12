@@ -11,7 +11,7 @@ const Profile = (props) => {
     }
     return (
         <div className={style.profile}>
-            <ProfileInfo main={props.main} profile={props.profile}/>
+            <ProfileInfo main={props.main} profile={props.profile} status={props.status} setStatus={props.setStatus} updateStatus={props.updateStatus}/>
             <Posts />
         </div>
 

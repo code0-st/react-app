@@ -1,6 +1,8 @@
 import React from 'react';
 import { setTotalCountAC, getUsers, follow, unfollow} from "../../Redux/authorsPage-reducer";
 import Preloader from '../Common/Preloader';
+import { compose } from 'redux';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 const { connect } = require("react-redux");
 const { default: Authors } = require("./Authors");
@@ -47,5 +49,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {setTotalCountAC,
-        getUsers, follow, unfollow})(AuthorsContainer);
+export default compose(
+    connect(mapStateToProps, {setTotalCountAC, getUsers, follow, unfollow}),
+    withAuthRedirect
+)(AuthorsContainer)

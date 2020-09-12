@@ -8,7 +8,7 @@ const ProfileInfo = (props) => {
     return (
         <div className={style.profileInfo}>
             <Avatar photo={props.profile.photos.large}/>
-            <Body social={props.main.mySocialLinks} profile={props.profile} />
+            <Body social={props.main.mySocialLinks} profile={props.profile} status={props.status} setStatus={props.setStatus} updateStatus={props.updateStatus} />
         </div>
     )
 }
