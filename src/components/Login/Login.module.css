@@ -1,0 +1,118 @@
+.loginPage {
+    justify-content: center;
+    display: grid;
+    grid-template-rows: 10fr 1fr;
+    grid-template-columns: 350px 350px;
+
+    grid-template-areas: "P L"
+                         "S S";
+
+    border: 3px solid #70707056;
+    padding: 20px 10px;
+
+    background-color: #fff;
+}
+
+.loginForm {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.picture {
+    grid-area: 'P';
+
+    display: block;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.signup {
+    grid-area: 'S';
+
+    margin-top: 10px;
+    text-align: center;
+}
+
+.loginForm_area {
+    grid-area: 'L';
+    margin: 0 auto;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
+
+input {
+    border: none;
+    border-bottom: 1px solid rgb(172, 172, 172);
+    color: rgb(124, 124, 124);
+    font-size: 18px;
+
+    padding: 5px 10px;
+}
+
+input:focus {
+    border: none;
+    border-bottom: 1px solid rgb(172, 172, 172);
+    outline: none;
+}
+
+input::placeholder {
+    font-size: 16px;
+    color: rgba(172, 172, 172, 0.739);
+    text-shadow: 0px 0px 5px 5px rgba(2, 2, 2, 0.657);
+}
+
+.icon {
+    display: block;
+    width: 20px;
+
+    margin-right: 20px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    letter-spacing: 1.4px;
+
+    color: rgba(172, 172, 172, 0.842);
+    text-shadow: 0px 0px 5px 5px rgba(2, 2, 2, 0.657);
+
+    text-transform: lowercase;
+}
+
+.remember input {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.loginBtn {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 1.3px;
+
+    padding: 10px 20px;
+    background-color: rgba(97, 170, 192, 0.603);
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.signupLink {
+    text-decoration: none;
+    color: rgb(161, 83, 255);
+    letter-spacing: 1.2px;
+    font-size: 16px;
+}

@@ -74,3 +74,21 @@ export const profileAPI = {
         );
     }
 }
+
+export const loginAPI = {
+    updateLogin(data) {
+        return (
+            instance.post('/auth/login', {
+                email: data.login,
+                password: data.password,
+                rememberMe: data.rememberMe ? true : false,
+            })
+            .then(response => {
+                if (response.resultCode === 0) {
+                    console.log(response);
+                    return response.data
+                }
+            })
+        )
+    }
+}
