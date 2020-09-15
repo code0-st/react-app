@@ -1,11 +1,5 @@
-import { headerAPI } from "../api/api";
-
-const SET_MY_ID = 'SET_MY_ID'; 
-const SET_MY_PROFILE_LINK = 'SET_MY_PROFILE_LINK';
-
 const initialState = {
-    myId: null,
-
+    
     popularAuthors: [
         {
             id: 0,
@@ -64,27 +58,7 @@ const initialState = {
 
 const sidebarReducer = (state = initialState, action) => {
     switch(action.type) {
-        case SET_MY_ID: return ( {...state, myId: action.id} );
-    //     case SET_MY_PROFILE_LINK: return {
-    //     }
         default: return state;
-    }
-}
-
-const setMyId = (id) => { return {type: SET_MY_ID, id}}
-
-export const getMyId = () => {
-    return (dispatch) => {
-        headerAPI.login()
-        .then(data => {
-            if (data.resultCode === 0) {
-               console.log(data);
-               console.log(data.data.id);
-                dispatch(setMyId(data.data.id));
-            } else {
-                console.log("YOU ARE LOOOOOOOSER");
-            }
-        })
     }
 }
 

@@ -38,8 +38,8 @@ export const usersAPI = {
     },
 }
 
-export const headerAPI = {
-    login() {
+export const loginAPI = {
+    me() {
         return (
             instance.get(`auth/me`).
                 then(response => {
@@ -47,6 +47,22 @@ export const headerAPI = {
                 })
         );
     },
+
+    login(data) {
+        return (
+            instance.post('/auth/login', {
+                email: data.email,
+                password: data.password,
+                rememberMe: data.rememberMe ? true : false,
+            })
+        )
+    },
+
+    logout() {
+        return (
+            instance.delete('/auth/login')
+        )
+    }
 }
 
 export const profileAPI = {
@@ -72,23 +88,5 @@ export const profileAPI = {
                 return response.data
             })
         );
-    }
-}
-
-export const loginAPI = {
-    updateLogin(data) {
-        return (
-            instance.post('/auth/login', {
-                email: data.login,
-                password: data.password,
-                rememberMe: data.rememberMe ? true : false,
-            })
-            .then(response => {
-                if (response.resultCode === 0) {
-                    console.log(response);
-                    return response.data
-                }
-            })
-        )
     }
 }

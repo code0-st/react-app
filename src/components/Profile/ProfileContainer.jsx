@@ -3,16 +3,20 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Profile from './Profile';
-import { setProfile, setStatus, updateStatus } from '../../Redux/profilePage-reducer';
+import { setMyProfile, setProfile, setStatus, updateStatus } from '../../Redux/profilePage-reducer';
 import Preloader from '../Common/Preloader';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
     componentDidMount = () => { 
-        const userId = this.props.match.params.userID;
+        let userId = this.props.match.params.userID;
+        if (!userId) userId = this.props.id;
+     
         this.props.setProfile(userId);
         this.props.setStatus(userId);
+        
+        
     }
 
     render = () => {
@@ -31,9 +35,10 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
-        main: state.profilePage.main,
+        mySocialLinks: state.profilePage.mySocialLinks,
         isFetching: state.profilePage.profileIsFetching,
         status: state.profilePage.status,
+        id: state.auth.id,
     }
 }
 

@@ -53,29 +53,25 @@ const initialState = {
     newPostTitle: '',
     newPostText: '',
 
-    main: {
-        name: 'Кирилл Эдуардович',
-        activity: 'Junior developer',
-        mySocialLinks: [
-            {
-                href: '/followers',
-                amount: 0,
-                title: 'followers',
-            },
-            {
-                href: '/followings',
-                amount: 0,
-                title: 'followings',
-            },
-            {
-                href: '/myposts',
-                amount: 0,
-                title: 'posts',
-            }
-        ],
     
-        photo: 'https://sun2-3.userapi.com/c854016/v854016369/22a679/yTmYKW0ijp8.jpg',
-    },
+    mySocialLinks: [
+        {
+            href: '/followers',
+            amount: 0,
+            title: 'followers',
+        },
+        {
+            href: '/followings',
+            amount: 0,
+           title: 'followings',
+        },
+        {
+            href: '/myposts',
+            amount: 0,
+            title: 'posts',
+        }
+    ],
+    
 
     profile: null,
     profileIsFetching: false,
@@ -176,56 +172,22 @@ const profilePageReducer = (state = initialState, action) => {
     };
 };
 
-export const changeNewPostTitleActionCreator = (newLetter) => {
-    return {
-        type: CHANGE_NEW_POST_TITLE,
-        text: newLetter,
-    };
-};
+export const changeNewPostTitleActionCreator = newLetter => {return {type: CHANGE_NEW_POST_TITLE, text: newLetter}};
 
-export const changeNewPostTextActionCreator = (newLetter) => {
-    return {
-        type: CHANGE_NEW_POST_TEXT,
-        text: newLetter,
-    };
-};
+export const changeNewPostTextActionCreator = (newLetter) => {return {type: CHANGE_NEW_POST_TEXT, text: newLetter}};
 
-export const addNewPostActionCreator = () => {
-    return {
-        type: ADD_NEW_POST,
-    };
-};
+export const addNewPostActionCreator = () => {return {type: ADD_NEW_POST}};
 
-export const likeClickActionCreator = id => {
-    return {
-        type: LIKE_CLICK,
-        id,
-    }
-}
+export const likeClickActionCreator = id => {return {type: LIKE_CLICK, id}};
 
-export const dislikeClickActionCreator = id => {
-    return {
-        type: DISLIKE_CLICK,
-        id,
-    }
-}
+export const dislikeClickActionCreator = id => {return {type: DISLIKE_CLICK, id}};
 
-export const setDataActionCreator = (data) => {
-    return {
-        type: SET_PPROFILE_DATA,
-        data,
-    }
-}
+export const setDataActionCreator = (data) => {return {type: SET_PPROFILE_DATA, data}};
 
-export const setUserProfileAC = (profile) => {
-    return {
-        type: SET_USER_PROFILE,
-        profile: profile,
-    }
-}
+export const setUserProfileAC = (profile) => {return {type: SET_USER_PROFILE, profile}};
 
-const toggleProfileFetching = (isFetching) => { return {type: TOGGLE_PROFILE_FETCHING, isFetching}}
-const setUserStatus = (status) => {return {type: SET_USER_STATUS, status}}
+const toggleProfileFetching = (isFetching) => { return {type: TOGGLE_PROFILE_FETCHING, isFetching}};
+const setUserStatus = (status) => {return {type: SET_USER_STATUS, status}};
 
 export const setProfile = (userId) => {
     return (dispatch) => {

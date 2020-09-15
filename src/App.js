@@ -17,7 +17,7 @@ function App(props) {
         <Header state={props.state.header} />
         <SidebarContainer />
         <div className="app-content">
-          <Route path="/profile/:userID" render={() => <ProfileContainer />} />
+          <Route path="/profile/:userID?" render={() => <ProfileContainer />} />
           <Route path="/authors" render={() => <AuthorsContainer />} />
           <Route path="/login" render={() => <Login />} />
           {/* TODO: create feedPage */}

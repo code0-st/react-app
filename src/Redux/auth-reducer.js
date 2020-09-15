@@ -1,13 +1,11 @@
-import { headerAPI } from '../api/api';
+import { loginAPI } from '../api/api';
 
 const SET_AUTH_PROFILE_DATA = 'SET_AUTH_PROFILE_DATA';
-const TOGGLE_LOGIN = 'TOGGLE_LOGIN';
 
 const initialState = {
     id: null,
     email: null,
     login: null,
-    isFetching: false,
     isLogin: false,
 };
 
@@ -19,34 +17,40 @@ const authReducer = (state = initialState, action) => {
                 ...action.data,
             }
         };
-        case TOGGLE_LOGIN: {
-            return {
-                ...state,
-                isLogin: action.isLogin,
-            }
-            
-        };
         
         default:
             return state;
     }
 }
 
-export const setAuthProfileData = (id, email, login) => {return {type: SET_AUTH_PROFILE_DATA, data: {id, email, login}}}
-export const toggleIsLogin = (isLogin) => {return {type: TOGGLE_LOGIN, isLogin}}
+export const setAuthProfileData = (id, email, login, isLogin) => {return {type: SET_AUTH_PROFILE_DATA, data: {id, email, login, isLogin}}}
 
-export const loginUser = () => {
-    return (dispatch) => {
-        headerAPI.login()
-        .then(data => {
-            if (data.resultCode === 0) {
-                let { id, email, login } = data.data;
-                dispatch(setAuthProfileData(id, email, login));
-                dispatch(toggleIsLogin(true));
-            }
-        })
-    }
+export const loginUser = () => dispatch => {
+    loginAPI.me()
+    .then(data => {
+        if (data.resultCode === 0) {
+            let { id, email, login } = data.data;
+            dispatch(setAuthProfileData(id, email, login, true));
+        }
+    })
 }
 
+export const login = data => dispatch => {
+    loginAPI.login(data)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(loginUser())
+            }
+        })
+} 
+
+export const logout = () => dispatch => {
+    loginAPI.logout()
+    .then( response => {
+        if (response.data.resultCode === 0) {
+            dispatch(setAuthProfileData(null, null, null, false))
+        }
+    })
+}
 
 export default authReducer;

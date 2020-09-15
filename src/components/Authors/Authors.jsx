@@ -1,5 +1,4 @@
 import React from 'react';
-import * as axios from 'axios';
 import style from './Authors.module.css';
 import userPhoto from '../../assets/img/user.png';
 import { NavLink } from 'react-router-dom';

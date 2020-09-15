@@ -64,3 +64,21 @@ nav {
 
     margin: 0px 10px;
 }
+
+.user {
+    color: rgba(0, 0, 0, 0.712);
+    
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1.3px;
+
+    text-shadow: 0px 0px 10px rgba(128, 191, 243, 0.472);
+
+    cursor: default;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

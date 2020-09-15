@@ -1,7 +1,7 @@
 import React from 'react';
 import Buttons from './Buttons';
 import { connect } from 'react-redux';
-import { loginUser } from '../../../Redux/auth-reducer';
+import { loginUser, logout } from '../../../Redux/auth-reducer';
 
 class ButtonsContainer extends React.Component {
     componentDidMount = () => {
@@ -10,7 +10,7 @@ class ButtonsContainer extends React.Component {
 
     render = () => {
         return (
-            <Buttons {...this.props} />
+            <Buttons login={this.props.login} isLogin={this.props.isLogin} logout={this.props.logout} />
         );
     }
 }
@@ -22,4 +22,4 @@ const mapStateToProps = (state) => {
         login: state.auth.login,
     }
 }
-export default connect(mapStateToProps, { loginUser })(ButtonsContainer);
+export default connect(mapStateToProps, { loginUser, logout })(ButtonsContainer);

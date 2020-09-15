@@ -8,7 +8,7 @@ import style from './Sidebar.module.css';
 const Sidebar = (props) => {
     return (
         <div className={style.column + ' ' + 'sidebar'}>
-            <Navigation sidebarNavigation={props.sidebarNavigation} myId={props.myId} />
+            <Navigation sidebarNavigation={props.sidebarNavigation} />
             <PopularAuthors popularAuthors={props.popularAuthors} />
             <SocialShare socialShare={props.socialShare} />
         </div>

@@ -4,14 +4,16 @@ import userIco from '../../assets/img/UserLogin.png';
 import lockIco from '../../assets/img/LockLogin.png';
 import style from './Login.module.css';
 import { Field, reduxForm } from 'redux-form';
-import { loginAPI, profileAPI } from '../../api/api';
+import { login } from '../../Redux/auth-reducer';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const LoginForm = (props) => {
     return (
         <form className={style.loginForm} onSubmit={props.handleSubmit}>
             <div className={style.row}>
                 <img className={style.icon} src={userIco} alt=""/>
-                <Field placeholder={'Your Email'} component={'input'} name={'login'}/>
+                <Field placeholder={'Your Email'} component={'input'} name={'email'}/>
             </div>
             <div className={style.row}>
                 <img className={style.icon} src={lockIco} />
@@ -30,12 +32,13 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm( { form: 'login' } )(LoginForm)
 const Login = (props) => {
     const onSubmit = (data) => {
-        loginAPI.updateLogin(data)
-        .then(data => {
-            // profileAPI.setProfile(data.id)
-            console.log(data);
-        })
+        props.login(data)   
     }
+
+    if (props.isLogin) {
+        return <Redirect to={'/profile'} /> // TODO: render my profile
+    }
+    
     return (
         <div className={style.loginPage}>
             <img src={picture} className={style.picture}></img>
@@ -49,5 +52,10 @@ const Login = (props) => {
     );
 }
 
+const mapStateToProps = (state) => {
+    return {
+        isLogin: state.auth.isLogin,
+    }
+} 
 
-export default Login;
+export default connect(mapStateToProps, { login })(Login);
