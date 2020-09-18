@@ -1,11 +1,8 @@
 import { profileAPI } from '../api/api';
 
-const CHANGE_NEW_POST_TITLE = 'CHANGE_NEW_POST_TITLE';
-const CHANGE_NEW_POST_TEXT = 'CHANGE_NEW_POST_TEXT';
 const ADD_NEW_POST = 'ADD_NEW_POST';
 const LIKE_CLICK = 'LIKE_CLICK';
 const DISLIKE_CLICK = 'DISLIKE_CLICK';
-const SET_PPROFILE_DATA = 'SET_PROFILE_DATA';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const TOGGLE_PROFILE_FETCHING = 'TOGGLE_PROFILE_FETCHING';
 const SET_USER_STATUS = 'SET_USER_STATUS';
@@ -50,10 +47,6 @@ const initialState = {
             },
     ],
 
-    newPostTitle: '',
-    newPostText: '',
-
-    
     mySocialLinks: [
         {
             href: '/followers',
@@ -72,7 +65,6 @@ const initialState = {
         }
     ],
     
-
     profile: null,
     profileIsFetching: false,
     status: '',
@@ -81,25 +73,14 @@ const initialState = {
 const profilePageReducer = (state = initialState, action) => {
     
     switch (action.type) {
-        case CHANGE_NEW_POST_TITLE:
-            return {
-                ...state,
-                newPostTitle: action.text
-            };
-
-        case CHANGE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.text
-            };
 
         case ADD_NEW_POST:
             let now = new Date();
             let today = `${now.getDate()} ${now.toLocaleString('ru', { month: 'long' })} ${now.getFullYear()}, ${now.getHours()}:${now.getMinutes()}`;
             let newPost = {
                 id: state.myPosts.length,
-                title: state.newPostTitle,
-                text: state.newPostText,
+                title: action.newPostTitle,
+                text: action.newPostText,
                 like: {
                     amount: 0,
                     isLiked: false,
@@ -107,34 +88,30 @@ const profilePageReducer = (state = initialState, action) => {
                 subjectName: 'Программирование',
                 publicationTime: String(today),
             }
-            state.main.mySocialLinks[2].amount = state.myPosts.length + 1;
+            state.mySocialLinks[2].amount = state.myPosts.length + 1;
             return {
                 ...state,
                     myPosts: [...state.myPosts, newPost],
-                    newPostText: '',
-                    newPostTitle: '',
             };
 
         case LIKE_CLICK:
-            {
-                let stateCopy = { ...state };
-                stateCopy.myPosts = state.myPosts.map(post => {
-                    if (post.id === action.id && post.like.isLiked === false) {
-                        return {
-                            ...post,
-                            like: {
-                                ...post.like,
-                                amount: post.like.amount + 1,
-                                isLiked: true,
-                            }
+            let stateCopy = { ...state };
+            stateCopy.myPosts = state.myPosts.map(post => {
+                if (post.id === action.id && post.like.isLiked === false) {
+                    return {
+                        ...post,
+                        like: {
+                            ...post.like,
+                            amount: post.like.amount + 1,
+                            isLiked: true,
                         }
                     }
+                }
                     return post;
-                });
-                return stateCopy;
-            }
-
-        case DISLIKE_CLICK:
+            });
+            return stateCopy;
+        
+        case DISLIKE_CLICK: {
             let stateCopy = { ...state };
             stateCopy.myPosts = state.myPosts.map(post => {
                 if (post.id === action.id && post.like.isLiked === true) {
@@ -149,19 +126,9 @@ const profilePageReducer = (state = initialState, action) => {
                 }
                 return post;
             });
-            return stateCopy;
+            return stateCopy; }
 
-        case SET_PPROFILE_DATA:
-            return {
-                ...state,
-                myPosts: [...state.posts.myPosts, ...action.data],
-            }
-
-        case SET_USER_PROFILE:
-            return {
-                ...state,
-                profile: action.profile,
-            }
+        case SET_USER_PROFILE: {return {...state, profile: action.profile}}
 
         case TOGGLE_PROFILE_FETCHING: {return {...state, profileIsFetching: action.isFetching}}
 
@@ -172,17 +139,11 @@ const profilePageReducer = (state = initialState, action) => {
     };
 };
 
-export const changeNewPostTitleActionCreator = newLetter => {return {type: CHANGE_NEW_POST_TITLE, text: newLetter}};
+export const addNewPost = (newPostTitle, newPostText) => {return {type: ADD_NEW_POST, newPostTitle, newPostText}};
 
-export const changeNewPostTextActionCreator = (newLetter) => {return {type: CHANGE_NEW_POST_TEXT, text: newLetter}};
+export const likeClick = id => {return {type: LIKE_CLICK, id}};
 
-export const addNewPostActionCreator = () => {return {type: ADD_NEW_POST}};
-
-export const likeClickActionCreator = id => {return {type: LIKE_CLICK, id}};
-
-export const dislikeClickActionCreator = id => {return {type: DISLIKE_CLICK, id}};
-
-export const setDataActionCreator = (data) => {return {type: SET_PPROFILE_DATA, data}};
+export const dislikeClick = id => {return {type: DISLIKE_CLICK, id}};
 
 export const setUserProfileAC = (profile) => {return {type: SET_USER_PROFILE, profile}};
 

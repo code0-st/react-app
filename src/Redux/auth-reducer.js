@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form';
 import { loginAPI } from '../api/api';
 
 const SET_AUTH_PROFILE_DATA = 'SET_AUTH_PROFILE_DATA';
@@ -40,6 +41,8 @@ export const login = data => dispatch => {
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(loginUser())
+            } else {
+                dispatch(stopSubmit('login', {_error: response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'}))
             }
         })
 } 

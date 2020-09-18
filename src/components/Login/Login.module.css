@@ -116,3 +116,33 @@ input::placeholder {
     letter-spacing: 1.2px;
     font-size: 16px;
 }
+
+.error {
+    position: absolute;
+
+    color: rgb(58, 11, 11);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1.3px;
+}
+
+.error::before {
+    content: '';
+    background: url('../../assets/img/error.svg') 0 no-repeat;
+    padding-right: 30px;
+    margin-left: 10px;
+}
+
+.formError {
+    color: rgb(58, 11, 11);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1.3px;
+}
+
+.formError::before {
+    content: '';
+    background: url('../../assets/img/error.svg') 0 no-repeat;
+    padding-right: 30px;
+    margin-left: 10px;
+}
