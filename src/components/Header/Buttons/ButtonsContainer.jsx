@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import { loginUser, logout } from '../../../Redux/auth-reducer';
 
 class ButtonsContainer extends React.Component {
-    componentDidMount = () => {
-        this.props.loginUser();
-    }
-
+    
     render = () => {
         return (
             <Buttons login={this.props.login} isLogin={this.props.isLogin} logout={this.props.logout} />
