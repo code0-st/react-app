@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Profile from './Profile';
-import { setMyProfile, setProfile, setStatus, updateStatus } from '../../Redux/profilePage-reducer';
+import { setProfile, setStatus, updateStatus } from '../../Redux/profilePage-reducer';
 import Preloader from '../Common/Preloader';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
@@ -25,7 +25,7 @@ class ProfileContainer extends React.Component {
             {
             this.props.isFetching
                 ? <Preloader />
-                : <Profile {...this.props} profile={this.props.profile} status={this.props.status} setStatus={this.props.setStatus} updateStatus={this.props.updateStatus}/>
+                : <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
             }
             </>
         );

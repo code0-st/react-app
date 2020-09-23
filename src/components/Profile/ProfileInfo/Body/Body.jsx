@@ -6,7 +6,9 @@ import MySocial from './MySocial/MySocial';
 const Body = (props) => {
     return (
         <div className={style.body}>
-            <AboutMe profileInfo={props.profile} status={props.status} setStatus={props.setStatus} updateStatus={props.updateStatus}/> {/*TODO: fix bug with activity width */}
+            <AboutMe profileInfo={props.profile} 
+                    status={props.status} 
+                    updateStatus={props.updateStatus}/> {/*TODO: fix bug with activity width */}
             <MySocial social={props.social} />
         </div>
     );

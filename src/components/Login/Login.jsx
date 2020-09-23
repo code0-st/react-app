@@ -10,22 +10,22 @@ import { Redirect } from 'react-router-dom';
 import { required } from '../../utils/validators/validate';
 import { Input } from '../Common/FormsErrors';
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error, ...props}) => {
     return (
-        <form className={style.loginForm} onSubmit={props.handleSubmit}>
+        <form className={style.loginForm} onSubmit={handleSubmit}>
             <div className={style.row}>
                 <img className={style.icon} src={userIco} alt=""/>
                 <Field placeholder={'Your Email'} component={Input} name={'email'} validate={[required]} />
             </div>
             <div className={style.row}>
-                <img className={style.icon} src={lockIco} />
+                <img className={style.icon} src={lockIco} alt=""/>
                 <Field placeholder={'Password'} type={'password'} component={Input} name={'password'} validate={[required]} />
             </div>
             <div className={style.remember}>
                 <Field type={'checkbox'} component={'input'} name={'rememberMe'}/>Remember me
             </div>
             {
-                props.error && <div className={style.formError}>{props.error}</div>
+                error && <div className={style.formError}>{error}</div>
             }
             <div>
                 <button className={style.loginBtn}>Log in</button>
@@ -35,24 +35,23 @@ const LoginForm = (props) => {
 }
 const LoginReduxForm = reduxForm( { form: 'login' } )(LoginForm)
 
-const Login = (props) => {
+const Login = ({login, isLogin, ...props}) => {
     const onSubmit = (data) => {
-        console.log(data);
-        props.login(data)   
+        login(data)   
     }
 
-    if (props.isLogin) {
+    if (isLogin) {
         return <Redirect to={'/profile'} /> 
     }
     
     return (
         <div className={style.loginPage}>
-            <img src={picture} className={style.picture}></img>
+            <img src={picture} className={style.picture} alt={''}></img>
             <div className={style.loginForm_area}>
                 <LoginReduxForm onSubmit={onSubmit}/>
             </div>
             <div className={style.signup}>
-                <a className={style.signupLink} href="#">Create an account</a>
+                <a className={style.signupLink} href="/login">Create an account</a>
             </div>
         </div>
     );

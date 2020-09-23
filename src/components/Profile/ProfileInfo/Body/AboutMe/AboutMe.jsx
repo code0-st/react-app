@@ -9,7 +9,7 @@ const AboutMe = (props) => {
         <div className={style.info}>
             <Name name={props.profileInfo.fullName} />
             <Activity activity={props.profileInfo.aboutMe} />
-            <Status status={props.status} setStatus={props.setStatus} updateStatus={props.updateStatus}/>
+            <Status status={props.status} updateStatus={props.updateStatus}/>
         </div>
     );
 }

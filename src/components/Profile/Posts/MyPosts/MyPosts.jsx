@@ -9,7 +9,7 @@ const MyPosts = (props) => {
     return (
         <div className={style.myPosts}>
             {
-                props.myPosts.map(post => <div className={style.post}>
+                props.myPosts.map(post => <div key={post.id} className={style.post}>
                     <div className={style.postInfo}>
                         <div className={style.postSubject}>{post.subjectName}</div>
                         <div className={style.postPublTime}>{post.publicationTime}</div>

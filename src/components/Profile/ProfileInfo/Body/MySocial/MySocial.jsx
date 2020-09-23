@@ -4,7 +4,7 @@ import style from './../Body.module.css';
 
 const MySocial = (props) => {
     const mySocialLinksElements = props.social.
-        map(link => <MySocialLink href={link.href} amount={link.amount} title={link.title} />)
+        map(link => <MySocialLink key={link.id} href={link.href} amount={link.amount} title={link.title} />)
 
     return (
         <div className={style.mySocial}>

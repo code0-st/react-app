@@ -2,23 +2,17 @@ import React from 'react';
 import style from './Authors.module.css';
 import userPhoto from '../../assets/img/user.png';
 import { NavLink } from 'react-router-dom';
+import Paginator from "../Common/Paginator/Paginator";
 
 const Authors = (props) => {
-    let pagesCount = Math.ceil(props.totalCount / props.usersForPage);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
     return (
         <div className={style.authorsPage}>
-            <ul>            
-            {    
-                pages.map(element => <span className={props.currentPage === element ? style.clicked : style.default}
-                    onClick={() => props.onChangeCurrentPage(element)}>{element}</span>)
-            }   
-            </ul>
-            {        
-            props.users.map(user => <div className={style.user}>
+        <Paginator totalCount={props.totalCount}
+                   usersForPage={props.usersForPage}
+                   currentPage={props.currentPage}
+                   onChangeCurrentPage={props.onChangeCurrentPage} />
+            {
+            props.users.map(user => <div key={user.id} className={style.user}>
             <NavLink to={`profile/${user.id}`} className={style.photo}>
                 <img src={user.photos.small === null ? userPhoto : user.photos.small} alt=""/>
             </NavLink>
@@ -39,7 +33,7 @@ const Authors = (props) => {
                     ? <button className={`${style.btn} ${style.unfollow}`}
                         disabled={props.disabled.some(id => id === user.id)}
                         onClick={ () => props.unfollow(user.id)}>Отписаться</button>
-                        
+
                     : <button className={`${style.btn} ${style.follow}`}
                         disabled={props.disabled.some(id => id === user.id)}
                         onClick={ () => props.follow(user.id)}>Подписаться</button>

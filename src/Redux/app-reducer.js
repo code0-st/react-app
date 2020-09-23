@@ -7,22 +7,21 @@ const initialState = {
 };
 
 const appReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case INITIALIZING_SUCCESS: {return {...state, initialized: true}};
-        
+    switch (action.type) {
+        case INITIALIZING_SUCCESS: { return { ...state, initialized: true } };
+
         default:
             return state;
     }
 }
 
-const initializingSuccess = () => {return {type: INITIALIZING_SUCCESS}}
+const initializingSuccess = () => { return { type: INITIALIZING_SUCCESS } }
 
-export const initializeApp = () => dispatch => {
-    let promise = dispatch(loginUser())
-    Promise.all([promise])
-        .then(() => {
-            dispatch(initializingSuccess())
-        })
+export const initializeApp = () => async dispatch => {
+    let promise = dispatch(loginUser());
+    await Promise.all([promise]);
+    dispatch(initializingSuccess());
+
 }
 
 export default appReducer;

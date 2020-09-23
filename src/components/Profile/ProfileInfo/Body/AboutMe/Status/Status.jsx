@@ -1,58 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import style from '../../Body.module.css';
+import crossIco from '../../../../../../assets/img/cross.svg';
 
-class Status extends React.Component {
-    state = {
-        editMode: false,
-        status: this.props.status,
+const Status = (props) => {
+    const [status, setStatus] = useState(props.status);
+    const [editMode, setEditMode] = useState(false);
+    useEffect(() => setStatus(props.status), [props.status]);
+
+    let activateEditMode = () => {
+        setEditMode(true)
+    }
+    let diactivateEditMode = () => {
+        setEditMode(false)
+    }
+    let saveStatus = () => {
+        props.updateStatus(status)
+        setEditMode(false)
+    }
+    let onStatusChange = (e) => {
+        setStatus(e.currentTarget.value)
     }
 
-    componentDidUpdate = (prevProps, prevState) => {
-        if(prevProps.status !== this.props.status) {
-            this.setState({
-                status: this.props.status,
-            })
-        }
-    }
-
-    onInputStatusChange = (e) => {
-        this.setState({
-            status: e.currentTarget.value,
-        })
-    }
-
-    activateEditMode = () => {
-        this.setState({
-            editMode: true,
-        })
-    }
-
-    diactivateEditMode = () => {
-        this.setState({
-            editMode: false,
-        });
-        this.props.updateStatus(this.state.status);
-    }
-
-    render = () => {
-        return (
-            <div> 
-                {
-                    !this.state.editMode && <div className={style.status}
-                    onClick={this.activateEditMode} >{this.props.status}</div>
-                }
-                {
-                    this.state.editMode && <div className={style.status_inputArea}>
-                        <input type="text" className={style.status_input} 
-                        value={this.state.status} autoFocus={true} onChange={this.onInputStatusChange}/>
-                        <button className={style.saveBtn}
-                        onClick={this.diactivateEditMode}>Сохранить</button>
-                    </div>
-                }        
-            </div>
-        )
-        
-    }
+    return (
+        <div>
+            {   
+                !editMode && <div className={style.status}
+                                  onClick={activateEditMode}>{props.status}</div>
+            }
+            {
+                editMode && <div className={style.status_inputArea}>
+                    <input type="text"
+                        value={status}
+                        onChange={onStatusChange}
+                        className={style.status_input}
+                        autoFocus={true} />
+                    <button className={style.saveBtn} onClick={saveStatus}>Сохранить</button>
+                    <img src={crossIco} className={style.exit} onClick={diactivateEditMode} alt={'Close'}/>
+                </div>
+            }
+        </div>
+    )
 }
-
 export default Status;

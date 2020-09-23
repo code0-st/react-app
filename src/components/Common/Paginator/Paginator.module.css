@@ -1,0 +1,32 @@
+.paginator {
+    width: 895px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #f8f8f8;
+}
+
+.paginator__prevBtn {
+    cursor: pointer;
+}
+.prevArr {
+    width: 35px;
+    transform: rotate(180deg);
+}
+.paginator__nextBtn {
+    cursor: pointer;
+}
+.nextArr {
+    width: 35px;
+}
+
+.clicked {
+    font-weight: bold;
+}
+
+.default {
+    font-weight: normal;
+}

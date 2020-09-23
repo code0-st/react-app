@@ -164,15 +164,19 @@
 .link:hover .title, .link:hover .amount {
     color: rgba(40, 40, 40, 0.7);
 }
-
-.info {
-
-}
-
 .mySocial {
     width: 400px;
     display: flex;
     align-items: center;
 
     justify-content: space-around;
+}
+
+.exit {
+    position: absolute;
+    cursor: pointer;
+    top: 15px;
+    right: 15px;
+
+    width: 15px;
 }

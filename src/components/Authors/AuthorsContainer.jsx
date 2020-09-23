@@ -1,8 +1,9 @@
 import React from 'react';
-import { setTotalCountAC, getUsers, follow, unfollow} from "../../Redux/authorsPage-reducer";
+import { setTotalCountAC, requestUsers, follow, unfollow} from "../../Redux/authorsPage-reducer";
 import Preloader from '../Common/Preloader';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { getCurrentPage, getDisabled, getIsFetching, getTotalCount, getUsers, getUsersForPage } from '../../Redux/auth-selector';
 
 const { connect } = require("react-redux");
 const { default: Authors } = require("./Authors");
@@ -10,11 +11,11 @@ const { default: Authors } = require("./Authors");
 
 class AuthorsContainer extends React.Component {
     componentDidMount = () => {
-        this.props.getUsers(this.props.usersForPage, this.props.currentPage);
+        this.props.requestUsers(this.props.usersForPage, this.props.currentPage);
     }
 
     onChangeCurrentPage = (pageNumber) => {
-        this.props.getUsers(this.props.usersForPage, pageNumber);
+        this.props.requestUsers(this.props.usersForPage, pageNumber);
     }
 
     render = () => {
@@ -40,16 +41,16 @@ class AuthorsContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.authorsPage.users,
-        usersForPage: state.authorsPage.usersForPage,
-        currentPage: state.authorsPage.currentPage,
-        totalCount: state.authorsPage.totalCount,
-        isFetching: state.authorsPage.isFetching,
-        disabled: state.authorsPage.disabled,
+        users: getUsers(state),
+        usersForPage: getUsersForPage(state),
+        currentPage: getCurrentPage(state),
+        totalCount: getTotalCount(state),
+        isFetching: getIsFetching(state),
+        disabled: getDisabled(state),
     }
 }
 
 export default compose(
-    connect(mapStateToProps, {setTotalCountAC, getUsers, follow, unfollow}),
+    connect(mapStateToProps, {setTotalCountAC, requestUsers, follow, unfollow}),
     withAuthRedirect
 )(AuthorsContainer)

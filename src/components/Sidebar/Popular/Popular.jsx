@@ -4,7 +4,7 @@ import style from './Popular.module.css'
 
 const PopularAuthors = (props) => {
     const popularAuthorsElements = props.popularAuthors.
-        map(author => <Author imgSrc={author.imgSrc} name={author.name} />)
+        map(author => <Author key={author.id} imgSrc={author.imgSrc} name={author.name} />)
     return (
         <div className={style.popularAuthors}>
             <div className={style.popular}>Лучшие авторы</div>

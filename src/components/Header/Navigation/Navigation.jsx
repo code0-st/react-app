@@ -5,7 +5,7 @@ import styles from './../header.module.css';
 const Navigation = (props) => {
 
     const headerNavigationElements = props.headerNavigation.
-        map(link => <Link href={link.href} title={link.title} />)
+        map(link => <Link key={link.id} href={link.href} title={link.title} />)
 
     return (
         <nav>

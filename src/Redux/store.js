@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import headerReducer from "./header-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import profilePageReducer from "./profilePage-reducer";
@@ -19,7 +19,11 @@ let reducers = combineReducers({
     form: formReducer, 
 });
 
-let store = createStore(reducers, applyMiddleware(thunk));
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+
+// let store = createStore(reducers, applyMiddleware(thunk));
 
 export default store;
 

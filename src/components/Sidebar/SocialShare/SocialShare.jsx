@@ -4,7 +4,7 @@ import style from './Social.module.css';
 
 const SocialShare = (props) => {
     const socialShareElements = props.socialShare.
-        map(link => <SocialLink href={link.href} imgSrc={link.imgSrc} title={link.title} />)
+        map(link => <SocialLink key={link.id} href={link.href} imgSrc={link.imgSrc} title={link.title} />)
     return (
         <div className="socialShare">
             <div className={style.row}>
