@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/react-app/static/css/main.560169af.chunk.css",
+    "main.js": "/react-app/static/js/main.e1b139d0.chunk.js",
+    "main.js.map": "/react-app/static/js/main.e1b139d0.chunk.js.map",
+    "runtime-main.js": "/react-app/static/js/runtime-main.0efc6056.js",
+    "runtime-main.js.map": "/react-app/static/js/runtime-main.0efc6056.js.map",
+    "static/js/2.02d2f030.chunk.js": "/react-app/static/js/2.02d2f030.chunk.js",
+    "static/js/2.02d2f030.chunk.js.map": "/react-app/static/js/2.02d2f030.chunk.js.map",
+    "static/css/3.05c132d8.chunk.css": "/react-app/static/css/3.05c132d8.chunk.css",
+    "static/js/3.2e28b4d6.chunk.js": "/react-app/static/js/3.2e28b4d6.chunk.js",
+    "static/js/3.2e28b4d6.chunk.js.map": "/react-app/static/js/3.2e28b4d6.chunk.js.map",
+    "static/css/4.4a7703e5.chunk.css": "/react-app/static/css/4.4a7703e5.chunk.css",
+    "static/js/4.9463d9c6.chunk.js": "/react-app/static/js/4.9463d9c6.chunk.js",
+    "static/js/4.9463d9c6.chunk.js.map": "/react-app/static/js/4.9463d9c6.chunk.js.map",
+    "index.html": "/react-app/index.html",
+    "precache-manifest.9a743f715d8d77db66b810f908207313.js": "/react-app/precache-manifest.9a743f715d8d77db66b810f908207313.js",
+    "service-worker.js": "/react-app/service-worker.js",
+    "static/css/3.05c132d8.chunk.css.map": "/react-app/static/css/3.05c132d8.chunk.css.map",
+    "static/css/4.4a7703e5.chunk.css.map": "/react-app/static/css/4.4a7703e5.chunk.css.map",
+    "static/css/main.560169af.chunk.css.map": "/react-app/static/css/main.560169af.chunk.css.map",
+    "static/js/2.02d2f030.chunk.js.LICENSE.txt": "/react-app/static/js/2.02d2f030.chunk.js.LICENSE.txt",
+    "static/media/Login_picture.png": "/react-app/static/media/Login_picture.f8e835d5.png",
+    "static/media/cross.svg": "/react-app/static/media/cross.297747f4.svg",
+    "static/media/Login.module.css": "/react-app/static/media/error.a292ab29.svg",
+    "static/media/preloader.svg": "/react-app/static/media/preloader.900ec5a6.svg",
+    "static/media/prevNextArrow.svg": "/react-app/static/media/prevNextArrow.25e5d7a6.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0efc6056.js",
+    "static/js/2.02d2f030.chunk.js",
+    "static/css/main.560169af.chunk.css",
+    "static/js/main.e1b139d0.chunk.js"
+  ]
+}
