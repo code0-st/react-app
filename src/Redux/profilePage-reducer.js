@@ -6,6 +6,7 @@ const DISLIKE_CLICK = 'DISLIKE_CLICK';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const TOGGLE_PROFILE_FETCHING = 'TOGGLE_PROFILE_FETCHING';
 const SET_USER_STATUS = 'SET_USER_STATUS';
+const SAVE_PHOTO ='SAVE_PHOTO';
 
 const initialState = {
 
@@ -138,6 +139,8 @@ const profilePageReducer = (state = initialState, action) => {
 
         case SET_USER_STATUS: { return { ...state, status: action.status } }
 
+        case SAVE_PHOTO: {return {...state, profile: {...state.profile, photos: action.payload}}}
+
         default:
             return state;
     };
@@ -145,14 +148,15 @@ const profilePageReducer = (state = initialState, action) => {
 
 export const addNewPost = (newPostTitle, newPostText) => { return { type: ADD_NEW_POST, newPostTitle, newPostText } };
 
-export const likeClick = id => { return { type: LIKE_CLICK, id } };
+export const likeClick = id => { return { type: LIKE_CLICK, id}};
 
-export const dislikeClick = id => { return { type: DISLIKE_CLICK, id } };
+export const dislikeClick = id => { return { type: DISLIKE_CLICK, id}};
 
-export const setUserProfileAC = (profile) => { return { type: SET_USER_PROFILE, profile } };
+export const setUserProfileAC = (profile) => {return {type: SET_USER_PROFILE, profile}};
 
-const toggleProfileFetching = (isFetching) => { return { type: TOGGLE_PROFILE_FETCHING, isFetching } };
-const setUserStatus = (status) => { return { type: SET_USER_STATUS, status } };
+const toggleProfileFetching = (isFetching) => {return {type: TOGGLE_PROFILE_FETCHING, isFetching}};
+const setUserStatus = (status) => {return {type: SET_USER_STATUS, status}};
+const savePhotoSuccess = (payload) => {return {type: SAVE_PHOTO, payload}};
 
 export const setProfile = userId => async dispatch => {
     dispatch(toggleProfileFetching(true))
@@ -172,6 +176,12 @@ export const updateStatus = status => async dispatch => {
     if (response.resultCode === 0) {
         dispatch(setUserStatus(status))
     }
+}
+
+export const savePhoto = (payload) => async dispatch => {
+    let response = await profileAPI.savePhoto(payload);
+    debugger
+    dispatch(savePhotoSuccess(response.data.data.photos));
 }
 
 export default profilePageReducer;

@@ -1,6 +1,36 @@
 .profileInfo {
     display: flex;
     align-items: start;
-
     margin-bottom: 30px;
+}
+
+.myPhotoInfo {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.choosePhoto {
+    border: none;
+    padding: 5px 10px;
+}
+
+.sendPhoto {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #818181;
+    border: 1px solid rgb(121, 121, 121);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    text-shadow: 0px 0px 10px rgb(0, 0, 0);
+
+    margin: 20px 0;
+}
+
+.sendPhoto:disabled {
+    cursor: not-allowed;
+
+    color: rgba(255, 255, 255, 0.5);
 }
