@@ -180,7 +180,6 @@ export const updateStatus = status => async dispatch => {
 
 export const savePhoto = (payload) => async dispatch => {
     let response = await profileAPI.savePhoto(payload);
-    debugger
     dispatch(savePhotoSuccess(response.data.data.photos));
 }
 

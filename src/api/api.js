@@ -8,6 +8,14 @@ const instance = axios.create({
     }
 });
 
+export const securityAPI = {
+    getCaptcha() {
+        return (
+            instance.get('security/get-captcha-url')
+        )
+    }
+}
+
 export const usersAPI = {
     getUsers(count, page) {
         return (
@@ -54,6 +62,7 @@ export const loginAPI = {
                 email: data.email,
                 password: data.password,
                 rememberMe: data.rememberMe ? true : false,
+                captcha: data.captcha ? data.captcha : null,
             })
         )
     },
